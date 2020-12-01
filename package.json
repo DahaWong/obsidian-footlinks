@@ -1,0 +1,9 @@
+{
+  "name": "obsidian-footlink",
+  "version": "0.0.1",
+  "description": "This is a obsidian plugin for extracting your link info into footer.",
+  "main": "src/main.ts",
+  "repository": "git@github.com:DahaWong/obsidian-footlink.git",
+  "author": "Daha",
+  "license": "MIT"
+}
