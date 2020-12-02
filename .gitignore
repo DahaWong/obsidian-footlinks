@@ -1,4 +1,4 @@
 build/
 *.log
 yarn.lock
-node-modules/
+node_modules/
