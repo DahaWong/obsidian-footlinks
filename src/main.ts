@@ -1,75 +1,84 @@
-import FootlinkSettingTab from "./FootlinkSettingTab";
+import FootlinksSettingTab from "./FootlinksSettingTab";
 import { Plugin, Notice } from "obsidian";
 
-export default class FootlinkPlugin extends Plugin {
-	public extractedLinks: Object[] = [];
-	public footerSeperator: string = "";
+interface MarkdownLink {
+	text: string;
+	url: string;
+}
+
+export default class FootlinksPlugin extends Plugin {
+	public extractedLinks: Array<MarkdownLink> = [];
+	public footSeperator: string = "";
+	public re: RegExp;
 
 	onload() {
-		this.addRibbonIcon("dice", "Footlink", () => {
-			this.filterLinks();
-			const footLinks = this.formatLinks(this.extractedLinks);
-			// this.saveToClipboard(linkRefs);
-			this.formatMainBody();
-			this.createFootlinkArea(footLinks);
+		this.addRibbonIcon("dice", "Footlinks", () => {
+			this.generateFootlinks();
 		});
-		this.addSettingTab(new FootlinkSettingTab(this.app, this));
+
+		this.addCommand({
+			id: "footlinks-current-page-shortcut",
+			name: "Refactor current page",
+			callback: () => this.generateFootlinks(),
+		});
+
+		this.addCommand({
+			id: "footlinks-global-shortcut",
+			name: "Generate footlinks on current page",
+			callback: () => this.generateFootlinks(),
+		});
+
+		this.addSettingTab(new FootlinksSettingTab(this.app, this));
 	}
 
-	filterLinks(): void {
+	generateFootlinks() {
+		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
 		const activeLeaf = this.app.workspace.activeLeaf ?? null;
-		const data: string = activeLeaf.view.data;
-		this.extractedLinks = [];
+		const source = activeLeaf.view.sourceMode;
+		const sourceContent = source.get();
+		const extractedLinks = this.extractLinks(sourceContent) ?? null;
+		if (extractedLinks) {
+			const newContent = this.refactorContent(sourceContent, extractedLinks);
+			source.set(newContent, false);
+		}
+	}
 
-		if (data) {
-			const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gm;
-			let match = re.exec(data);
+	extractLinks(text: string): Array<MarkdownLink> | void {
+		let extractedLinks: Array<MarkdownLink> = [];
+
+		if (text) {
+			let match = this.re.exec(text);
 
 			if (!match) {
 				new Notice("No legal links found.");
+				return;
 			}
 
 			do {
-				this.extractedLinks.push({ text: match[1], url: match[2] });
-			} while ((match = re.exec(data)) !== null);
+				extractedLinks.push({ text: match[1], url: match[2] });
+			} while ((match = this.re.exec(text)) !== null);
+
+			return extractedLinks;
 		} else {
-			new Notice("This document is still empty.");
+			new Notice("Page is still empty.");
 		}
 	}
 
-	formatLinks(links: Object[]): string {
-		let footLinks = "";
-		for (let link of links) {
-			const i = links.indexOf(link);
-			footLinks += i === 0 ? `${this.footerSeperator}\n` : "";
-			footLinks += `${link.text}: ${link.url}\n`;
-		}
-		return footLinks;
+	refactorContent(content: string, links: Array<MarkdownLink>): string {
+		const footlinks = this.formatLinks(links);
+		let newContent = content.replace(this.re, "[$1]");
+		newContent += footlinks;
+		return newContent;
 	}
 
-	formatMainBody() {
-		const activeLeaf = this.app.workspace.activeLeaf ?? null;
-		const source = activeLeaf.view.sourceMode;
-		const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
-		const sourceContent = source.get();
-		const newContent = sourceContent.replace(re, "$1");
-		source.set(newContent, false);
-	}
-
-	saveToClipboard(formatedData: string): boolean {
-		if (formatedData.length > 0) {
-			navigator.clipboard.writeText(formatedData);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	createFootlinkArea(footLinks: string) {
-		const activeLeaf = this.app.workspace.activeLeaf ?? null;
-		const source = activeLeaf.view.sourceMode;
-		const sourceContent = source.get();
-		const newContent = sourceContent + footLinks;
-		source.set(newContent, false);
+	formatLinks(links: Array<MarkdownLink>): string {
+		let footlinks = "";
+		let linkTexts = links.map((link) => `[${link.text}]: ${link.url}\n`);
+		linkTexts = linkTexts.filter((text, pos) => {
+			return linkTexts.indexOf(text) == pos;
+		});
+		const seperator = `${this.footSeperator}\n`;
+		footlinks = linkTexts.reduce((prev, current) => prev + current, seperator);
+		return footlinks;
 	}
 }

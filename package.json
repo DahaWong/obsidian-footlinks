@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
-    "build": "rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.js"
   },
   "devDependencies": {
     "css-loader": "^5.0.1",

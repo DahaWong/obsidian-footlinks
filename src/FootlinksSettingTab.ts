@@ -1,6 +1,6 @@
 import { PluginSettingTab, Setting } from "obsidian";
 
-export default class FootlinkSettingTab extends PluginSettingTab {
+export default class FootlinksSettingTab extends PluginSettingTab {
 	display(): void {
 		let { containerEl } = this;
 
@@ -9,8 +9,8 @@ export default class FootlinkSettingTab extends PluginSettingTab {
 		// containerEl.createEl("h2", { text: "Settings for my awesome plugin." });
 
 		new Setting(containerEl)
-			.setName("Footlink seperator")
-			.setDesc("Seperates the footlink area from main body")
+			.setName("Footlinks seperator")
+			.setDesc("Seperates the footlinks area from main body")
 			.addText((text) =>
 				text
 					.setPlaceholder("None")
@@ -28,7 +28,7 @@ export default class FootlinkSettingTab extends PluginSettingTab {
 			});
 
 		// new Setting(containerEl)
-		// 	.setName("Choose footlink style")
+		// 	.setName("Choose footlinks style")
 		// 	.addDropdown((dropdown) => {
 		// 		dropdown.addOption("Single brackets", "test display");
 		// 	});
