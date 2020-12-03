@@ -2,3 +2,4 @@ build/
 *.log
 yarn.lock
 node_modules/
+rollup.config.js
