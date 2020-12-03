@@ -1,6 +1,8 @@
 # Footlinks
+
+> This is an [Obsidian](https://obsidian.md) plugin.
+
 En | [简]()
-> An Obsidian plugin.
 
 It turns 
 
