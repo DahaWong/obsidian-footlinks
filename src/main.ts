@@ -22,7 +22,7 @@ export default class FootlinkPlugin extends Plugin {
 		this.extractedLinks = [];
 
 		if (data) {
-			const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))\)/gm;
+			const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gm;
 			let match = re.exec(data);
 
 			if (!match) {
@@ -50,7 +50,7 @@ export default class FootlinkPlugin extends Plugin {
 	formatMainBody() {
 		const activeLeaf = this.app.workspace.activeLeaf ?? null;
 		const source = activeLeaf.view.sourceMode;
-		const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))\)/gi;
+		const re: RegExp = /(\[.*?\])\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
 		const sourceContent = source.get();
 		const newContent = sourceContent.replace(re, "$1");
 		source.set(newContent, false);

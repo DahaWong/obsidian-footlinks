@@ -5,6 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 export default {
 	input: "./src/main.ts",
 	output: {
+		// dir: "/Users/dahawong/Documents/Note/丸记/.obsidian/plugins/footlink",
 		dir: "./build",
 		sourcemap: "inline",
 		format: "cjs",
