@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
+import { App, PluginSettingTab, Setting, Notice } from "obsidian";
 import FootlinksPlugin from "./main";
 
 export default class FootlinksSettingTab extends PluginSettingTab {
@@ -32,12 +32,12 @@ export default class FootlinksSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Show icon in side menu")
-			.setDesc("Reload app to take effect")
+			.setName("show icon in left side menu")
 			.addToggle((toggle) => {
 				toggle.setValue(this.plugin.setting.showIcon).onChange((value) => {
 					this.plugin.setting.showIcon = value;
 					this.plugin.saveData(this.plugin.setting);
+					new Notice(`Reload the app to ${value ? "add" : "remove"} icon.`);
 				});
 			});
 

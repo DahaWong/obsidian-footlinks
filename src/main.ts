@@ -12,10 +12,9 @@ export default class FootlinksPlugin extends Plugin {
 	public extractedLinks: Array<MarkdownLink> = [];
 	public re: RegExp;
 
-	onload() {
+	async onload() {
 		this.setting = new FootlinksSetting();
-		this.loadSetting();
-
+		await this.loadSetting();
 		if (this.setting.showIcon) {
 			this.addRibbonIcon("dice", "Footlinks", () => {
 				this.generateFootlinks();
