@@ -22,16 +22,16 @@ export default class FootlinksPlugin extends Plugin {
 		}
 
 		this.addCommand({
-			id: "footlinks-current-page-shortcut",
+			id: "footlinks-current-shortcut",
 			name: "Refactor current page",
 			callback: () => this.generateFootlinks(),
 		});
 
-		this.addCommand({
-			id: "footlinks-global-shortcut",
-			name: "Generate footlinks on current page",
-			callback: () => this.generateFootlinks(),
-		});
+		// this.addCommand({
+		// 	id: "footlinks-global-shortcut",
+		// 	name: "Refactor all pages",
+		// 	callback: () => this.generateFootlinks(),
+		// });
 
 		this.addSettingTab(new FootlinksSettingTab(this.app, this));
 	}
@@ -67,7 +67,7 @@ export default class FootlinksPlugin extends Plugin {
 			let match = this.re.exec(text);
 
 			if (!match) {
-				new Notice("No legal links found.");
+				new Notice("No legal links found on this page.");
 				return;
 			}
 
@@ -83,7 +83,7 @@ export default class FootlinksPlugin extends Plugin {
 
 	refactorContent(content: string, links: Array<MarkdownLink>): string {
 		const footlinks = this.formatLinks(links);
-		let newContent = content.replace(this.re, "[$1]");
+		let newContent = content.replace(this.re, "[$1]").trimEnd();
 		newContent += footlinks;
 		return newContent;
 	}

@@ -42,7 +42,7 @@ export default class FootlinksSettingTab extends PluginSettingTab {
 			});
 
 		// new Setting(containerEl)
-		// 	.setName("Choose footlinks style")
+		// 	.setName("Choose a footlinks style")
 		// 	.addDropdown((dropdown) => {
 		// 		dropdown.addOption("Single brackets", "test display");
 		// 	});
