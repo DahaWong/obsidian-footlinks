@@ -1,4 +1,5 @@
 import FootlinksSettingTab from "./FootlinksSettingTab";
+import FootlinksSetting from "./FootlinksSetting";
 import { Plugin, Notice } from "obsidian";
 
 interface MarkdownLink {
@@ -7,14 +8,19 @@ interface MarkdownLink {
 }
 
 export default class FootlinksPlugin extends Plugin {
+	public setting: FootlinksSetting;
 	public extractedLinks: Array<MarkdownLink> = [];
-	public footSeperator: string = "";
 	public re: RegExp;
 
 	onload() {
-		this.addRibbonIcon("dice", "Footlinks", () => {
-			this.generateFootlinks();
-		});
+		this.setting = new FootlinksSetting();
+		this.loadSetting();
+
+		if (this.setting.showIcon) {
+			this.addRibbonIcon("dice", "Footlinks", () => {
+				this.generateFootlinks();
+			});
+		}
 
 		this.addCommand({
 			id: "footlinks-current-page-shortcut",
@@ -31,8 +37,19 @@ export default class FootlinksPlugin extends Plugin {
 		this.addSettingTab(new FootlinksSettingTab(this.app, this));
 	}
 
+	async loadSetting() {
+		const loadedSetting = await this.loadData();
+		if (loadedSetting) {
+			this.setting.footSeperator = loadedSetting.footSeperator;
+			this.setting.needGlobalRefactor = loadedSetting.needGlobalRefactor;
+			this.setting.refactorInterval = loadedSetting.refactorInterval;
+			this.setting.showIcon = loadedSetting.showIcon;
+		} else {
+			this.saveData(this.setting);
+		}
+	}
+
 	generateFootlinks() {
-		// this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
 		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}(\/.*?\)?(\.\w{1,6})?)*?)\)/gi;
 		const activeLeaf = this.app.workspace.activeLeaf ?? null;
 		const source = activeLeaf.view.sourceMode;
@@ -78,7 +95,7 @@ export default class FootlinksPlugin extends Plugin {
 		linkTexts = linkTexts.filter((text, pos) => {
 			return linkTexts.indexOf(text) == pos;
 		});
-		const seperator = `${this.footSeperator}\n\n`;
+		const seperator = `\n\n${this.setting.footSeperator}\n\n`;
 		footlinks = linkTexts.reduce((prev, current) => prev + current, seperator);
 		return footlinks;
 	}

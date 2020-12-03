@@ -1,12 +1,21 @@
-import { PluginSettingTab, Setting } from "obsidian";
+import { App, PluginSettingTab, Setting } from "obsidian";
+import FootlinksPlugin from "./main";
 
 export default class FootlinksSettingTab extends PluginSettingTab {
+	private readonly plugin: FootlinksPlugin;
+	public seperatorSetting: Setting;
+	public iconSetting: Setting;
+	public refactorSetting: Setting;
+	public refactorIntervalSetting: Setting;
+
+	constructor(app: App, plugin: FootlinksPlugin) {
+		super(app, plugin);
+		this.plugin = plugin;
+	}
+
 	display(): void {
 		let { containerEl } = this;
-
 		containerEl.empty();
-
-		// containerEl.createEl("h2", { text: "Settings for my awesome plugin." });
 
 		new Setting(containerEl)
 			.setName("Footlinks seperator")
@@ -14,17 +23,22 @@ export default class FootlinksSettingTab extends PluginSettingTab {
 			.addText((text) =>
 				text
 					.setPlaceholder("None")
-					.setValue("")
+					.setValue(this.plugin.setting.footSeperator)
 					.onChange((value) => {
-						// console.log("Secret: " + value);
+						this.plugin.setting.footSeperator = value;
+						this.plugin.saveData(this.plugin.setting);
+						text.setValue(value);
 					})
 			);
 
 		new Setting(containerEl)
 			.setName("Show icon in side menu")
+			.setDesc("Reload app to take effect")
 			.addToggle((toggle) => {
-				toggle.setValue(false);
-				// .onchange(()=>{})
+				toggle.setValue(this.plugin.setting.showIcon).onChange((value) => {
+					this.plugin.setting.showIcon = value;
+					this.plugin.saveData(this.plugin.setting);
+				});
 			});
 
 		// new Setting(containerEl)
