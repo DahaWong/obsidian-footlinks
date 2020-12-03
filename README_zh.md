@@ -1,7 +1,7 @@
 # 尾链 Footlinks
 > 这是一个黑曜石（Obsidian）第三方插件。
 
-[En](https://github.com/DahaWong/obsidian-footlinks/blob/main/README.md) | 简
+（[En](https://github.com/DahaWong/obsidian-footlinks/blob/main/README.md) | 简）
 
 这个插件可以把
 
