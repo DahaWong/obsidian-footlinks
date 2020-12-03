@@ -32,7 +32,8 @@ export default class FootlinksPlugin extends Plugin {
 	}
 
 	generateFootlinks() {
-		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
+		// this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*?))\)/gi;
+		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}(\/.*?\)?(\.\w{1,6})?)*?)\)/gi;
 		const activeLeaf = this.app.workspace.activeLeaf ?? null;
 		const source = activeLeaf.view.sourceMode;
 		const sourceContent = source.get();
@@ -77,7 +78,7 @@ export default class FootlinksPlugin extends Plugin {
 		linkTexts = linkTexts.filter((text, pos) => {
 			return linkTexts.indexOf(text) == pos;
 		});
-		const seperator = `${this.footSeperator}\n`;
+		const seperator = `${this.footSeperator}\n\n`;
 		footlinks = linkTexts.reduce((prev, current) => prev + current, seperator);
 		return footlinks;
 	}
