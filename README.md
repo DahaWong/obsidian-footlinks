@@ -8,7 +8,7 @@ En | [简](https://github.com/DahaWong/obsidian-footlinks/blob/main/README_zh.md
 
 ## Use
 - Click the icon of Footlinks on the left side menu.
-- Or, type command `Footlink`.
+- Or, type command `Footlinks`.
 
 ## Preference
 On `Footlinks` setting page, you can:
