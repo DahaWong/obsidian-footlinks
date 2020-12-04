@@ -49,7 +49,7 @@ export default class FootlinksPlugin extends Plugin {
 	}
 
 	generateFootlinks() {
-		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}(\/.*?\)?(\.\w{1,6})?)*?)\)/gi;
+		this.re = /\[(.*?)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\/(.*?(\(.*?\))*.*?)*?(\.\w{1,6})?)\)/gi;
 		const activeLeaf = this.app.workspace.activeLeaf ?? null;
 		const source = activeLeaf.view.sourceMode;
 		const sourceContent = source.get();
@@ -77,13 +77,16 @@ export default class FootlinksPlugin extends Plugin {
 
 			return extractedLinks;
 		} else {
-			new Notice("Page is still empty.");
+			new Notice("This Page is still empty.");
 		}
 	}
 
 	refactorContent(content: string, links: Array<MarkdownLink>): string {
 		const footlinks = this.formatLinks(links);
-		let newContent = content.replace(this.re, "[$1]").trimEnd();
+		let newContent = content
+			.replace(this.re, "[$1]") // Remove urls in main text
+			.trimEnd()
+			.replace(/\] ?\[/g, "]  ["); // Obsidian parses [x][y] as a footnote, so we add two spaces in between to fix in the case of adjacent link texts.
 		newContent += footlinks;
 		return newContent;
 	}
