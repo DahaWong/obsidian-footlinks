@@ -37,7 +37,7 @@ export default class FootlinksSettingTab extends PluginSettingTab {
 				toggle.setValue(this.plugin.setting.showIcon).onChange((value) => {
 					this.plugin.setting.showIcon = value;
 					this.plugin.saveData(this.plugin.setting);
-					new Notice(`Reload the app to ${value ? "add" : "remove"} icon.`);
+					new Notice(`Reload the app to see icon ${value ? "added" : "removed"}.`);
 				});
 			});
 
