@@ -2,7 +2,7 @@
 
 En | [简](https://github.com/DahaWong/obsidian-footlinks/blob/main/README_zh.md)
 
-*⚠️: Make sure you are using latest version.*
+*⚠️: Make sure you are using the latest version.*
 
 ![Demo](https://raw.githubusercontent.com/DahaWong/obsidian-footlinks/main/demo.png)
 
