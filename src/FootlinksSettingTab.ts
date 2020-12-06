@@ -32,12 +32,14 @@ export default class FootlinksSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("show icon in left side menu")
+			.setName("Show icon in left side menu")
 			.addToggle((toggle) => {
 				toggle.setValue(this.plugin.setting.showIcon).onChange((value) => {
 					this.plugin.setting.showIcon = value;
 					this.plugin.saveData(this.plugin.setting);
-					new Notice(`Reload the app to see icon ${value ? "added" : "removed"}.`);
+					new Notice(
+						`Reload the app to see icon ${value ? "added" : "removed"}.`
+					);
 				});
 			});
 

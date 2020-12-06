@@ -3,6 +3,8 @@
 
 [En](https://github.com/DahaWong/obsidian-footlinks/blob/main/README.md) | 简
 
+*⚠️: 请确保您使用的是最新的版本。*
+
 ![演示](https://raw.githubusercontent.com/DahaWong/obsidian-footlinks/main/demo.png)
 
 ## 使用
