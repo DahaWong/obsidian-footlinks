@@ -1,7 +1,5 @@
 # Footlinks
 
-> This is an [Obsidian](https://obsidian.md) plugin.
-
 En | [简](https://github.com/DahaWong/obsidian-footlinks/blob/main/README_zh.md)
 
 *⚠️: Make sure you are using latest version.*
