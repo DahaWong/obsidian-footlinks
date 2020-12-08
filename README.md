@@ -20,4 +20,4 @@ On `Footlinks` setting page, you can:
 2. More issues please report on [GitHub Issues](https://github.com/DahaWong/obsidian-footlinks/issues) or [Obsidian Forum](https://forum.obsidian.md/t/plugin-footlinks/9494) to let me know.
 
 ## Development Roadmap
-See [this page](https://github.com/DahaWong/obsidian-footlinks/projects).
+See [this page](https://github.com/DahaWong/obsidian-footlinks/projects/1).
