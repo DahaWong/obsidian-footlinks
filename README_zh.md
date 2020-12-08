@@ -17,7 +17,7 @@
 
 ## 已知问题
 1. **块级引用**中的尾链不能被 Obsidian 所识别，这可能是软件本身的缺陷。如果你正在大量地使用块级引用，请务必留意。
-2. 若有在使用中遇到其他问题请于 [GitHub Issues](https://github.com/DahaWong/obsidian-footlinks/issues) 或 [官方论坛页](https://forum.obsidian.md/t/plugin-footlinks/9494)提出。
+2. 若有在使用中遇到其他问题请于 [GitHub Issues](https://github.com/DahaWong/obsidian-footlinks/issues) 或[官方论坛页](https://forum.obsidian.md/t/plugin-footlinks/9494)提出。
 
 ## 开发规划
-见诸[此页面](https://github.com/DahaWong/obsidian-footlinks/projects)。
+见诸[此页面](https://github.com/DahaWong/obsidian-footlinks/projects/1)。
