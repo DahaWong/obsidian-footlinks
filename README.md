@@ -14,3 +14,10 @@ En | [简](https://github.com/DahaWong/obsidian-footlinks/blob/main/README_zh.md
 On `Footlinks` setting page, you can:
 -  Add a seperator between **main body** and **footlinks**, say `---`. (stay empty by default)
 - Decide whether the side menu icon is shown or not.
+
+## Known Issues
+1. Footlinks cannot be parsed by Obsidian in block quote, this could be considered as a bug of app. Just in case you are heavily using block quotes.
+2. More issues please report on [GitHub Issues](https://github.com/DahaWong/obsidian-footlinks/issues) or [Obsidian Forum](https://forum.obsidian.md/t/plugin-footlinks/9494) to let me know.
+
+## Development Roadmap
+See [this page](https://github.com/DahaWong/obsidian-footlinks/projects).
