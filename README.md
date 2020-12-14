@@ -21,3 +21,5 @@ On `Footlinks` setting page, you can:
 
 ## Development Roadmap
 See [this page](https://github.com/DahaWong/obsidian-footlinks/projects/1).
+
+*☕️ To express your thankfulness: [Buy Me a Coffee](https://buymeacoffee.com/daha)*
