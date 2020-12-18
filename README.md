@@ -22,4 +22,9 @@ On `Footlinks` setting page, you can:
 ## Development Roadmap
 See [this page](https://github.com/DahaWong/obsidian-footlinks/projects/1).
 
-*☕️ To express your thankfulness: [Buy Me a Coffee](https://buymeacoffee.com/daha)*
+---
+
+<p align=center>
+  ☕️ To express your thankfulness: <a href="https://buymeacoffee.com/daha" align=center>Buy Me a Coffee</a>
+</p>
+
