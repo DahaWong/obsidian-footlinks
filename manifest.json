@@ -1,9 +1,9 @@
 {
   "id": "footlinks",
   "name": "Footlinks",
-  "version": "0.1.7",
+  "version": "0.1.8",
+  "minAppVersion": "0.15.0",
   "description": "Extracts links from the main text to footer.",
   "author": "Daha",
-  "js": "main.js",
   "isDesktopOnly": false
 }

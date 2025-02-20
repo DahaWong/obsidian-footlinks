@@ -1,26 +1,25 @@
 {
   "name": "obsidian-footlink",
-  "version": "0.0.1",
+  "version": "0.1.8",
   "description": "This is a obsidian plugin for extracting your link info into footer.",
-  "main": "src/index.ts",
+  "main": "main.js",
   "repository": "git@github.com:DahaWong/obsidian-footlink.git",
   "author": "Daha",
   "license": "MIT",
+  "keywords": [],
   "scripts": {
-    "dev": "rollup --config rollup.config.js -w",
-    "build": "rollup --config rollup.config.js"
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
   },
   "devDependencies": {
-    "css-loader": "^5.0.1",
-    "style-loader": "^2.0.0",
-    "ts-loader": "^8.0.11",
-    "typescript": "^4.1.2",
-    "webpack-cli": "^4.2.0",
-    "tslib": "^2.0.3",
-    "obsidian": "https://github.com/obsidianmd/obsidian-api/tarball/master",
-    "rollup": "^2.32.1",
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^6.0.0"
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "5.29.0",
+    "@typescript-eslint/parser": "5.29.0",
+    "builtin-modules": "3.3.0",
+    "esbuild": "0.17.3",
+    "obsidian": "latest",
+    "tslib": "2.4.0",
+    "typescript": "4.7.4"
   }
 }
